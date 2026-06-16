@@ -14,8 +14,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "1"
-          memory: "256M"
+          cpus: ${FRONTEND_CPUS:-1}
+          memory: ${FRONTEND_RAM:-256M}
 
   backend:
     # build: ./backend
@@ -28,8 +28,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "1"
-          memory: "256M"
+          cpus: ${BACKEND_CPUS:-1}
+          memory: ${BACKEND_RAM:-256M}
 
 networks:
   bridge:

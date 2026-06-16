@@ -37,6 +37,10 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DOCKER_USER: ${{ secrets.DOCKER_USER }}
+      BACKEND_CPUS: ${{ secrets.BACKEND_CPUS }}
+      BACKEND_RAM: ${{ secrets.BACKEND_RAM }}
+      FRONTEND_CPUS: ${{ secrets.FRONTEND_CPUS }}
+      FRONTEND_RAM: ${{ secrets.FRONTEND_RAM }}
     steps:
       - name: Check out the repo
         uses: actions/checkout@v6
