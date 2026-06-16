@@ -52,6 +52,9 @@ run:
 - [frontend](https://hub.docker.com/repository/docker/tihdizer/docker-project-frontend)
 - [backend](https://hub.docker.com/repository/docker/tihdizer/docker-project-backend)
 
+## Starting order
+В docker-compose.yml для сервиса frontend задано depends_on относительно backend с условием service_healthy. Сначала поднимается и проходит проверку готовности backend (эндпоинт /health), после этого запускается контейнер frontend. 
+
 ## Scaling
 Несколько экземпляров API могут подниматься как реплики сервиса backend в Docker Compose. Запросы с фронта на /api/ проксирует nginx из контейнера frontend
 
