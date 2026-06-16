@@ -20,6 +20,7 @@ RUN npm run build
 
 FROM nginx:1.30-alpine3.23-slim
 
+COPY nginx.conf /etc/nginx/
 COPY --from=build /frontend/dist/ /frontend/
 
 EXPOSE 80
