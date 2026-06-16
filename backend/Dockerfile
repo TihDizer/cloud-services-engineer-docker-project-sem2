@@ -9,11 +9,16 @@ RUN go build -ldflags="-s -w" -o backend ./cmd/api
 
 FROM alpine:3.24.1
 
+ARG UID=1001
+
 COPY --from=build /backend/backend ./backend
 
 RUN apk add --no-cache curl
+RUN adduser -S -u ${UID} -G backend backend
 
 EXPOSE 8081
+
+USER backend
 
 CMD ["./backend"]
 

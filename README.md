@@ -27,11 +27,10 @@ frontend:
 
 Размеры итоговых образов:
 ```bash
-❯❯ docker image ls                                                              cloud-services-engineer-docker-project-sem2/backend on  main [!?⇡] via 🐹 fsh
-                                                                                                                                           i Info →   U  In Use
-IMAGE                           ID             DISK USAGE   CONTENT SIZE   EXTRA
-dockerproject-backend:latest    f9eb3edf8589       17.4MB             0B    U
-dockerproject-frontend:latest   d26a80ce6f1d       14.5MB             0B    U
+❯❯ docker image ls                                                                cloud-services-engineer-docker-project-sem2/backend on  main [!] via 🐹 fsh
+IMAGE                                     ID             DISK USAGE   CONTENT SIZE   EXTRA
+tihdizer/docker-project-backend:latest    2a50bf70535f       22.7MB             0B    U
+tihdizer/docker-project-frontend:latest   0b70f8d3f344       19.8MB             0B    U
 ```
 
 ## Configuration Frontend
@@ -42,12 +41,25 @@ build:
 run:
 - FRONTEND_CPUS - количество CPU для контейнера frontend 
 - FRONTEND_RAM - количество RAM для контейнера frontend 
-
+- UID - id пользователя для запуска nginx (по умолванию 1001)
 ## Configuration Backend
 run:
 - BACKEND_CPUS - количество CPU для контейнера backend
-- BACKEND_RAM -  количество RAM для контейнера backend 
+- BACKEND_RAM -  количество RAM для контейнера backend
+- UID - id пользователя для запуска бинарника backend (по умолванию 1001)
 
 ## Links
 - [frontend](https://hub.docker.com/repository/docker/tihdizer/docker-project-frontend)
 - [backend](https://hub.docker.com/repository/docker/tihdizer/docker-project-backend)
+
+## Scaling
+Несколько экземпляров API могут подниматься как реплики сервиса backend в Docker Compose. Запросы с фронта на /api/ проксирует nginx из контейнера frontend
+
+Пример запуска с тремя репликами backend: 
+```bash
+docker compose up -d --build --scale backend=3
+```
+
+## Security
+
+Для запуска контейнеров frontend и backend используются непривилегированные пользователи frontend:nginx и backend:backend соответственно.
