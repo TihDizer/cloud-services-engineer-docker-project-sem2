@@ -32,8 +32,32 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USER }}/docker-project-frontend:latest
 
+  trivy:
+    name: scan for vulnerabilities
+    runs-on: ubuntu-latest
+    needs: build_and_push_to_docker_hub
+    steps:
+      - name: Run Trivy vulnerability scanner for Backend
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: "${{ secrets.DOCKER_USER }}/docker-project-backend:latest"
+          format: "table"
+          exit-code: "1"
+          ignore-unfixed: true
+          vuln-type: "os,library"
+          severity: "CRITICAL"
+      - name: Run Trivy vulnerability scanner for Frontend
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: "${{ secrets.DOCKER_USER }}/docker-project-frontend:latest"
+          format: "table"
+          exit-code: "1"
+          ignore-unfixed: true
+          vuln-type: "os,library"
+          severity: "CRITICAL"
+
   run-with-docker-compose:
-    name: Push Docker image to DockerHub
+    name: run docker-compose
     runs-on: ubuntu-latest
     env:
       DOCKER_USER: ${{ secrets.DOCKER_USER }}
@@ -41,6 +65,7 @@ jobs:
       BACKEND_RAM: ${{ secrets.BACKEND_RAM }}
       FRONTEND_CPUS: ${{ secrets.FRONTEND_CPUS }}
       FRONTEND_RAM: ${{ secrets.FRONTEND_RAM }}
+    needs: trivy
     steps:
       - name: Check out the repo
         uses: actions/checkout@v6
