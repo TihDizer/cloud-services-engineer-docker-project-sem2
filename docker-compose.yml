@@ -2,6 +2,7 @@ name: docker project
 
 services:
   frontend:
+    # build: ./frontend
     image: ${DOCKER_USER:-tihdizer}/docker-project-frontend:latest
     restart: unless-stopped
     ports:
@@ -15,6 +16,7 @@ services:
           memory: "256M"
 
   backend:
+    # build: ./backend
     image: ${DOCKER_USER:-tihdizer}/docker-project-backend:latest
     restart: unless-stopped
     expose:
