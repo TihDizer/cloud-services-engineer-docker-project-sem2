@@ -35,6 +35,8 @@ jobs:
   run-with-docker-compose:
     name: Push Docker image to DockerHub
     runs-on: ubuntu-latest
+    env:
+      DOCKER_USER: ${{ secrets.DOCKER_USER }}
     steps:
       - name: Check out the repo
         uses: actions/checkout@v6
