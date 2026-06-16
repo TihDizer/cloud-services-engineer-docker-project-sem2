@@ -15,7 +15,7 @@ docker compose up -d
 Используются multi-stage сборки и легкие базовые образы
 
 backend:
-- build: использует `golang:1.17-alpine`;
+- build: использует `golang:1.25.7-alpine3.23`;
 - run: `alpine:3.24.1`;
 - бинарник собирается с флагами `-ldflags="-s -w"`, чтобы не переносить Go toolchain и уменьшить размер исполняемого файла.
 
@@ -66,3 +66,5 @@ docker compose up -d --build --scale backend=3
 ## Security
 
 Для запуска контейнеров frontend и backend используются непривилегированные пользователи frontend:nginx и backend:www-data соответственно.
+
+Исправлен образ для backend build, на golang:1.25.7-alpine3.23 в котором нет уязвимостей
