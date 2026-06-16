@@ -33,3 +33,14 @@ IMAGE                           ID             DISK USAGE   CONTENT SIZE   EXTRA
 dockerproject-backend:latest    f9eb3edf8589       17.4MB             0B    U
 dockerproject-frontend:latest   d26a80ce6f1d       14.5MB             0B    U
 ```
+
+## Configuration Frontend
+- BASE_URL - базовый URL для Vue Router, по умолчанию /  
+- VUE_APP_API_URL - префикс адреса API, по умолчанию /api/  
+- NODE_ENV - режим сборки для Node/npm, по умолчанию development
+
+## Configuration Backend
+
+## Links
+- [frontend](https://hub.docker.com/repository/docker/tihdizer/docker-project-frontend)
+- [backend](https://hub.docker.com/repository/docker/tihdizer/docker-project-backend)
