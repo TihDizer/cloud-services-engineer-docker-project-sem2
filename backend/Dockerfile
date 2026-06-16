@@ -5,7 +5,7 @@ COPY go.mod go.sum ./
 RUN go mod download
 
 COPY . ./
-RUN go build -o backend ./cmd/api
+RUN go build -ldflags="-s -w" -o backend ./cmd/api
 
 EXPOSE 8081
 
