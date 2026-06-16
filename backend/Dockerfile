@@ -14,7 +14,7 @@ ARG UID=1001
 COPY --from=build /backend/backend ./backend
 
 RUN apk add --no-cache curl
-RUN adduser -S -u ${UID} -G backend backend
+RUN adduser -S -u ${UID} -G www-data backend
 
 EXPOSE 8081
 

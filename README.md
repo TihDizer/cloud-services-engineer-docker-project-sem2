@@ -65,4 +65,4 @@ docker compose up -d --build --scale backend=3
 
 ## Security
 
-Для запуска контейнеров frontend и backend используются непривилегированные пользователи frontend:nginx и backend:backend соответственно.
+Для запуска контейнеров frontend и backend используются непривилегированные пользователи frontend:nginx и backend:www-data соответственно.
